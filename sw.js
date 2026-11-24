@@ -1,5 +1,5 @@
 // service worker do Mapa de Leonida (gerado por montar_gta6.py): guarda só os arquivos do próprio site
-const CACHE = 'leonida-20261124-192743';
+const CACHE = 'leonida-20261124-194138';
 const ARQS = ['./', './index.html', './manifest.webmanifest', './icon-192.png', './icon-512.png', './apple-touch-icon.png'];
 const BASE = new URL('./', self.location).pathname;
 self.addEventListener('install', e => {

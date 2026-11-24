@@ -1343,7 +1343,7 @@ if(COSTA){
 function costaCores(noite){
   COSTA_L.terra.forEach(l=>l.setStyle(noite?{color:'#4a5566',fillColor:'#2a313b'}:{color:'#b3a275',fillColor:'#e4d8b4'}));
   COSTA_L.limites.forEach(l=>l.setStyle({color:noite?'#8e9bb0':'#7a6845'})); }
-function namesOn(){ return S.names===undefined||S.names===null? baseAtual()!=='poster' : !!S.names; }
+function namesOn(){ return S.names===undefined||S.names===null? true : !!S.names; }
 function renderRegions(){
   const z=map.getZoom();
   // tamanho igual ao do jogo: cresce com o zoom (0,0548×2^(z-8)), limitado no zoom 14
