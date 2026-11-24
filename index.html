@@ -731,6 +731,24 @@ button,input,select,textarea{font:inherit;color:inherit}
 .btn.dng:hover{border-color:var(--bad);color:var(--bad)}
 .savedinfo{grid-column:1/3;font-size:11px;color:var(--mut);text-align:center}
 .savedinfo.dirty{color:var(--acc2)}
+#syncBtn.on{border-color:var(--ok);color:var(--ok)}
+.sd-wrap{position:fixed;inset:0;background:rgba(0,0,0,.6);z-index:2500;display:none;align-items:center;justify-content:center;padding:16px}
+.sd-wrap.on{display:flex}
+.sd{width:min(420px,100%);max-height:100%;overflow:auto;background:var(--panel);border:1px solid var(--line);border-radius:12px;padding:16px;box-shadow:0 10px 40px rgba(0,0,0,.5)}
+.sd-h{display:flex;align-items:center;gap:8px;margin-bottom:8px}
+.sd-h b{flex:1;font-size:16px}
+.sd-x{background:var(--panel2);border:1px solid var(--line);border-radius:8px;width:40px;height:40px;font-size:16px;cursor:pointer;flex:none}
+.sd p{margin:0 0 12px;color:var(--mut);font-size:13px;line-height:1.45}
+.sd label{display:block;font-size:12.5px;margin-bottom:5px}
+.sd-in{display:flex;gap:6px}
+.sd-in input{flex:1;min-width:0;background:var(--panel2);border:1px solid var(--line);border-radius:8px;padding:10px;font-size:16px;outline:none}
+.sd-in input:focus{border-color:var(--acc)}
+.sd-in button{background:var(--panel2);border:1px solid var(--line);border-radius:8px;padding:0 12px;min-height:44px;cursor:pointer;font-size:12.5px;flex:none}
+.sd-st{min-height:18px;margin:10px 0;font-size:12.5px;color:var(--mut)}
+.sd-st.ok{color:var(--ok)} .sd-st.bad{color:var(--bad)}
+.sd-acts{display:flex;flex-direction:column;gap:8px}
+.sd-acts .btn{min-height:44px;font-size:14px}
+.sd-acts .btn[disabled]{opacity:.6;cursor:default}
 .cl-item{display:flex;align-items:center;gap:8px;padding:7px 8px;border-bottom:1px solid var(--line);cursor:pointer}
 .cl-item:hover{background:var(--panel2)}
 .cl-item input{accent-color:var(--ok);width:16px;height:16px;flex:none}
@@ -924,6 +942,7 @@ select.full{width:100%;background:var(--panel2);border:1px solid var(--line);bor
       <div class="btn" id="saveJson" title="Exporta o progresso em arquivo .json (leve)">⬇ Exportar progresso</div>
       <div class="btn" id="loadJson">⬆ Importar progresso</div>
       <div class="btn dng" id="reset">↺ Zerar concluídos</div>
+      <button type="button" class="btn" id="syncBtn" style="display:none;grid-column:1/3">👤 Entrar para salvar na conta</button>
       <div class="savedinfo" id="savedInfo">Progresso salvo automaticamente neste navegador</div>
     </div>
   </aside>
@@ -1089,6 +1108,9 @@ const HEAT = {"groups":[["Animals - Hunting","Animais - Caça",["496","536","529
 const ATLAS = {"url2x":"https://media.mapgenie.io/v2/assets/prod/games/grand-theft-auto-6/icon-set/build/v141/atlas@2x.png","size2x":[1344,1356],"size1x":[1344,1356],"ic":{"29011":[1024,960,60,60],"29013":[1084,960,60,60],"29015":[1144,960,60,60],"29017":[1204,960,60,60],"29019":[1264,960,60,60],"29021":[0,1056,60,60],"29022":[60,1056,60,60],"29023":[120,1056,60,60],"29024":[180,1056,60,60],"29025":[240,1056,60,60],"29026":[300,1056,60,60],"29027":[360,1056,60,60],"29028":[420,1056,60,60],"29029":[480,1056,60,60],"29030":[540,1056,60,60],"29031":[600,1056,60,60],"29032":[900,1056,60,60],"29033":[60,1116,60,60],"29034":[120,1116,60,60],"29035":[180,1116,60,60],"29036":[240,1116,60,60],"29037":[300,1116,60,60],"29038":[360,1116,60,60],"29039":[420,1116,60,60],"29040":[480,1116,60,60],"29041":[540,1116,60,60],"29042":[600,1116,60,60],"29043":[660,1116,60,60],"29044":[720,1116,60,60],"29045":[780,1116,60,60],"29046":[840,1116,60,60],"29047":[900,1116,60,60],"29048":[960,1116,60,60],"29049":[1020,1116,60,60],"29050":[1080,1116,60,60],"29051":[1140,1116,60,60],"29052":[1200,1116,60,60],"29053":[1260,1116,60,60],"29054":[0,1176,60,60],"29055":[60,1176,60,60],"29056":[120,1176,60,60],"29057":[180,1176,60,60],"29059":[240,1176,60,60],"29060":[300,1176,60,60],"29061":[360,1176,60,60],"29062":[420,1176,60,60],"29063":[480,1176,60,60],"29065":[600,1176,60,60],"29066":[600,1176,60,60],"29067":[600,1176,60,60],"29082":[660,1176,60,60],"29083":[1140,1176,60,60],"29084":[1200,1176,60,60],"29085":[1260,1176,60,60],"29086":[0,1236,60,60],"29087":[60,1236,60,60],"29088":[120,1236,60,60],"29089":[1200,1176,60,60],"29090":[1200,1176,60,60],"29091":[1200,1176,60,60],"29093":[180,1236,60,60],"29095":[240,1236,60,60],"29096":[300,1236,60,60],"29097":[360,1236,60,60],"29099":[420,1236,60,60],"29112":[480,1236,60,60],"29113":[480,1236,60,60],"29114":[480,1236,60,60],"29120":[180,1236,60,60],"29133":[540,1236,60,60],"29134":[600,1236,60,60],"29135":[660,1236,60,60],"29136":[720,1236,60,60],"29137":[780,1236,60,60],"29138":[840,1236,60,60],"29139":[900,1236,60,60],"29140":[960,1236,60,60],"29141":[1020,1236,60,60],"29142":[1080,1236,60,60],"29143":[1140,1236,60,60],"29144":[1200,1236,60,60]}};
 const ROT = {"5552":["nature",0,0.79519,-0.9277],"5553":["nature",0,0.76665,-0.90112],"5554":["nature",0,0.8067,-0.86178],"5555":["area",0,0.88253,-0.85929],"5556":["nature",0,0.91815,-0.8491],"5557":["area",0,0.96226,-0.77574],"5558":["nature",0,1.0152,-0.7768],"5559":["area",0,1.0287,-0.71732],"5560":["area",0,0.93461,-0.77522],"5561":["nature",0,1.03611,-0.67695],"5562":["nature",0,1.0514,-0.64488],"5563":["nature",0,1.00744,-0.68578],"5564":["place",0,1.00044,-0.70183],"5565":["area",0,0.8367,-0.82409],"5566":["nature",0,0.8906,-0.76992],"5567":["nature",0,0.94517,-0.69903],"5568":["place",0,0.96046,-0.66215],"5569":["nature",0,1.02286,-0.60573],"5570":["area",0,0.99749,-0.60613],"5571":["area",0,0.94623,-0.59199],"5572":["place",0,0.98276,-0.61921],"5573":["area",0,0.90239,-0.69832],"5574":["area",0,0.91369,-0.62986],"5575":["nature",0,0.91018,-0.55057],"5576":["place",0,0.92271,-0.55064],"5577":["nature",0,0.93123,-0.5162],"5578":["place",0,0.89391,-0.53355],"5579":["area",0,0.86279,-0.54618],"5580":["place",0,0.85771,-0.51423],"5581":["place",0,0.89802,-0.58437],"5582":["area",0,0.7919,-0.5765],"5583":["area",0,0.71891,-0.48529],"5584":["place",0,0.7996,-0.49473],"5585":["place",0,0.79487,-0.50392],"5586":["district",0,0.77576,-0.5149],"5587":["district",0,0.75403,-0.46453],"5588":["place",0,0.74134,-0.47283],"5589":["place",0,0.76266,-0.47893],"5590":["place",0,0.75485,-0.49502],"5591":["district",0,0.68957,-0.46451],"5592":["district",0,0.72889,-0.51833],"5593":["place",0,0.72126,-0.51621],"5594":["place",0,0.72576,-0.50367],"5595":["place",0,0.70915,-0.50524],"5596":["place",0,0.71984,-0.53077],"5597":["district",0,0.68853,-0.50704],"5598":["district",0,0.67342,-0.5148],"5599":["nature",0,0.84935,-0.7335],"5600":["place",0,0.86604,-0.70524],"5601":["area",0,0.83704,-0.65876],"5602":["nature",0,0.76091,-0.79229],"5603":["place",0,0.75107,-0.83406],"5604":["place",0,0.73962,-0.75939],"5605":["nature",0,0.77985,-0.72313],"5606":["area",0,0.7629,-0.62642],"5607":["nature",0,0.72272,-0.70501],"5608":["area",0,0.70439,-0.77946],"5609":["area",0,0.68571,-0.83383],"5610":["nature",0,0.6633,-0.90418],"5611":["nature",0,0.5783,-0.80627],"5612":["area",0,0.52853,-0.74052],"5613":["area",0,0.55907,-0.72555],"5614":["place",0,0.58091,-0.74699],"5615":["place",0,0.49625,-0.6988],"5616":["area",0,0.63239,-0.74018],"5617":["place",0,0.62092,-0.72623],"5618":["area",0,0.5296,-0.65817],"5619":["place",0,0.52348,-0.67191],"5620":["area",0,0.67487,-0.72121],"5621":["area",0,0.63965,-0.65163],"5622":["place",0,0.65797,-0.66234],"5623":["place",0,0.62808,-0.66408],"5624":["place",0,0.63367,-0.63249],"5625":["area",0,0.55279,-0.63113],"5626":["place",0,0.58385,-0.64987],"5627":["place",0,0.51626,-0.6059],"5628":["nature",0,0.49335,-0.58006],"5629":["nature",0,0.47085,-0.6306],"5630":["area",0,0.40792,-0.64761],"5631":["nature",0,0.38007,-0.72773],"5632":["nature",0,0.35747,-0.73005],"5633":["nature",0,0.40388,-0.7855],"5634":["area",0,0.39488,-0.80762],"5635":["area",0,0.3822,-0.83632],"5636":["nature",0,0.41738,-0.88167],"5637":["area",0,0.69313,-0.5822],"5638":["district",0,0.70762,-0.63959],"5639":["district",0,0.70709,-0.59615],"5640":["district",0,0.73489,-0.57841],"5641":["district",0,0.76253,-0.54717],"5642":["district",0,0.74957,-0.55386],"5643":["district",0,0.70819,-0.57124],"5644":["district",0,0.72084,-0.55344],"5645":["place",0,0.69907,-0.55161],"5646":["district",0,0.66894,-0.61746],"5647":["district",0,0.67438,-0.5933],"5648":["district",0,0.66975,-0.56184],"5649":["district",0,0.64576,-0.50831],"5650":["district",0,0.62261,-0.57828],"5651":["district",0,0.62221,-0.54635],"5652":["district",0,0.61292,-0.46237],"5653":["district",0,0.60229,-0.50498],"5654":["district",0,0.58319,-0.5476],"5655":["district",0,0.58576,-0.5894],"5656":["place",0,0.55983,-0.5895],"5657":["district",0,0.57782,-0.61918],"5658":["county",0,0.50569,-0.74288],"5659":["county",0,0.66103,-0.53613],"5660":["county",0,0.81782,-0.76079],"5661":["county",0,0.84708,-0.57495],"5662":["county",0,0.97067,-0.7299],"5663":["state",0,0.74086,-0.68171]};
 const MODO = 'web';
+const SYNC_REPO = 'thigomartins/mapa-leonida-progresso';
+// base da API do GitHub; o ?ghapi= só vale em localhost (teste com o mock_github.py)
+const GH_API = (['localhost','127.0.0.1'].includes(location.hostname) && new URLSearchParams(location.search).get('ghapi')) || 'https://api.github.com';
 </script>
 <script>
 document.addEventListener('DOMContentLoaded',function(){
@@ -1146,11 +1168,24 @@ function readEmbedded(){ try{ const j=JSON.parse(document.getElementById('saved-
 function readLocal(){ try{ const j=JSON.parse(localStorage.getItem(LS_KEY)||'null'); return j&&j.v?j:null; }catch(e){ return null; } }
 (function(){ const a=readEmbedded(), b=readLocal(); const pick=(a&&b)?(b.savedAt>=a.savedAt?b:a):(a||b); if(pick) S=Object.assign(DEF(),pick); })();
 let dirtyFile=false, tSave=null;
-const SYNC={on:false,ok:false,ver:0,pend:{done:{},notes:{},custom:{}},snap:{done:{},notes:{},custom:{}},t:null,busy:false,applying:false,primeiro:true};
+/* sincronização: o "pend" (mudanças ainda não enviadas), o código de acesso e a marca de primeira conexão ficam FORA de S
+   (não vão para o Exportar progresso, nem para o Salvar HTML, nem para LS_KEY) */
+const PEND_KEY='gta6-leonida-sync-pend', TK_KEY='gta6-leonida-sync-token', JOIN_KEY='gta6-leonida-sync-joined';
+const pendVazioObj=()=>({done:{},notes:{},custom:{}});
+function lsGet(k){ try{ return localStorage.getItem(k); }catch(e){ return null; } }
+function lsSet(k,v){ try{ if(v==null) localStorage.removeItem(k); else localStorage.setItem(k,v); }catch(e){} }
+function pendLoad(){ const o=pendVazioObj(); try{ const j=JSON.parse(lsGet(PEND_KEY)||'null'); if(j) for(const k in o) if(j[k]&&typeof j[k]==='object') o[k]=j[k]; }catch(e){} return o; }
+const SYNC={on:false,ok:false,ver:0,pend:pendLoad(),snap:{done:{},notes:{},custom:{}},t:null,busy:false,again:false,applying:false,primeiro:true,
+  mode:null,track:false,ready:false,err:null,tok:'',etag:null,sha:null,remote:null,tr:null,iv:null};
+function pendSave(){ const p=SYNC.pend; lsSet(PEND_KEY,(Object.keys(p.done).length||Object.keys(p.notes).length||Object.keys(p.custom).length)?JSON.stringify(p):null); }
 function persist(){ S.savedAt=Date.now(); try{ localStorage.setItem(LS_KEY,JSON.stringify(S)); }catch(e){} dirtyFile=true; updSavedInfo(); syncDiff(); }
 function persistSoon(){ clearTimeout(tSave); tSave=setTimeout(persist,300); }
 function updSavedInfo(){ const el=document.getElementById('savedInfo');
+  if(typeof syncUiUpd==='function') syncUiUpd();
+  if(typeof SYNC!=='undefined'&&SYNC.on&&SYNC.mode==='gh'){ el.classList.remove('dirty');
+    el.textContent=SYNC.err==='token'?'⚠️ Código de acesso inválido':SYNC.err==='rede'?'⚠️ Sem conexão: as marcações serão enviadas quando a internet voltar':(SYNC.ok&&SYNC.ready)?'🔄 Salvo automaticamente na conta':'🔄 Entrando na conta...'; return; }
   if(typeof SYNC!=='undefined'&&SYNC.on){ el.classList.remove('dirty'); el.textContent=SYNC.ok?'🔄 Progresso compartilhado com os aparelhos da casa':'⚠️ Sem conexão com o PC — salvando só neste aparelho'; return; }
+  if(SYNC_REPO){ el.classList.remove('dirty'); el.textContent='Salvo só neste aparelho · entre para salvar na conta'; return; }
   el.classList.toggle('dirty',dirtyFile);
   el.textContent=dirtyFile?'Salvo neste navegador · use "Salvar HTML" para levar o progresso no arquivo':'Progresso salvo automaticamente neste navegador'; }
 
@@ -1566,28 +1601,26 @@ map.on('click',()=>{ if(innerWidth<760) side.classList.remove('open'); });
 
 buildSections(); buildHeat(); refresh(); updSavedInfo(); applyLook(); syncStart();
 
-/* ---------------- sincronização entre aparelhos (servidor da rede de casa) ---------------- */
+/* ---------------- sincronização entre aparelhos ----------------
+   Dois transportes com o mesmo formato remoto {done:{id:[v,ts]},notes:{id:[texto,ts]},custom:{id:[obj|null,ts]}} (vence o carimbo mais novo):
+   - LAN: servidor_mapa.py da rede de casa (/api/estado); tem prioridade quando responde.
+   - Conta (GitHub): arquivo progresso.json no repositório SYNC_REPO, com o código de acesso salvo só neste aparelho.
+   Aqui só há declarações de função (syncStart é chamada antes deste trecho). */
 function snapOf(){ const c={}; S.custom.forEach(p=>c[p.id]=JSON.stringify(p)); return {done:Object.assign({},S.done),notes:Object.assign({},S.notes),custom:c}; }
+function pendVazio(){ const p=SYNC.pend; return !Object.keys(p.done).length&&!Object.keys(p.notes).length&&!Object.keys(p.custom).length; }
+function pendClone(){ return JSON.parse(JSON.stringify(SYNC.pend)); }
+// retira do pend só o que foi enviado e não mudou durante o envio
+function pendDrop(sent){ const q=SYNC.pend;
+  for(const k in sent) for(const id in sent[k]){ const c=q[k]&&q[k][id], s=sent[k][id]; if(c&&c[1]===s[1]&&JSON.stringify(c[0])===JSON.stringify(s[0])) delete q[k][id]; }
+  pendSave(); }
 function syncDiff(){
-  if(!SYNC.on||SYNC.applying) return; const now=Date.now(), a=SYNC.snap, b=snapOf(), q=SYNC.pend;
+  if(!SYNC.track||SYNC.applying) return; const now=Date.now(), a=SYNC.snap, b=snapOf(), q=SYNC.pend;
   new Set([...Object.keys(a.done),...Object.keys(b.done)]).forEach(id=>{ if(!!a.done[id]!==!!b.done[id]) q.done[id]=[b.done[id]?1:0,now]; });
   new Set([...Object.keys(a.notes),...Object.keys(b.notes)]).forEach(id=>{ if((a.notes[id]||'')!==(b.notes[id]||'')) q.notes[id]=[b.notes[id]||'',now]; });
   new Set([...Object.keys(a.custom),...Object.keys(b.custom)]).forEach(id=>{ if(a.custom[id]!==b.custom[id]) q.custom[id]=[b.custom[id]?JSON.parse(b.custom[id]):null,now]; });
-  SYNC.snap=b; clearTimeout(SYNC.t); SYNC.t=setTimeout(syncPush,350);
+  SYNC.snap=b; pendSave(); clearTimeout(SYNC.t); SYNC.t=setTimeout(syncPush,SYNC.mode==='gh'?1200:350);
 }
-async function syncPush(){
-  const p=SYNC.pend; if(!Object.keys(p.done).length&&!Object.keys(p.notes).length&&!Object.keys(p.custom).length) return;
-  SYNC.pend={done:{},notes:{},custom:{}}; SYNC.busy=true;
-  try{ const r=await fetch('/api/estado',{method:'POST',body:JSON.stringify(p)}); if(!r.ok) throw 0; SYNC.ok=true; }
-  catch(e){ SYNC.ok=false; for(const k in p) SYNC.pend[k]=Object.assign(p[k],SYNC.pend[k]); }
-  SYNC.busy=false; updSavedInfo();
-}
-async function syncPull(){
-  if(SYNC.busy) return;
-  try{ const r=await fetch('/api/estado?v='+SYNC.ver,{cache:'no-store'}); SYNC.ok=true; if(r.status!==204) applyRemote(await r.json()); }
-  catch(e){ SYNC.ok=false; } updSavedInfo();
-  if(SYNC.ok&&(Object.keys(SYNC.pend.done).length||Object.keys(SYNC.pend.notes).length||Object.keys(SYNC.pend.custom).length)) syncPush();
-}
+function syncPush(){ if(SYNC.mode==='lan') return lanPush(); if(SYNC.mode==='gh'&&SYNC.ready) return ghPush(); }
 function applyRemote(e){
   SYNC.ver=e.ver||0; const P=SYNC.pend;
   const nd={}; Object.entries(e.done||{}).forEach(([id,[v]])=>{ if(v) nd[id]=1; }); Object.entries(P.done).forEach(([id,[v]])=>{ if(v) nd[id]=1; else delete nd[id]; });
@@ -1606,18 +1639,195 @@ function applyRemote(e){
     if(changed.length&&SYNC.primeiro===false) toast('🔄 '+changed.length+' ponto(s) atualizado(s) por outro aparelho'); }
   SYNC.primeiro=false;
 }
+// primeira conexão deste aparelho a este destino: soma o que ele já tinha (nada se perde).
+// Nas conexões seguintes o remoto vence, exceto o que está no pend persistido.
+function syncJoin(e,marca){
+  if(lsGet(JOIN_KEY)!==marca){
+    const now=Date.now(), P=SYNC.pend;
+    Object.keys(S.done).forEach(id=>{ const r=(e.done||{})[id]; if(!r||!r[0]) P.done[id]=[1,now]; });
+    Object.entries(S.notes).forEach(([id,v])=>{ const r=(e.notes||{})[id]; if(!r||!r[0]) P.notes[id]=[v,now]; });
+    S.custom.forEach(p=>{ if(!(e.custom||{})[p.id]) P.custom[p.id]=[p,now]; });
+    pendSave(); lsSet(JOIN_KEY,marca);
+  }
+  SYNC.primeiro=true; applyRemote(e);
+}
 async function syncStart(){
-  if(!/^https?:/.test(location.protocol)) return;
-  let e; try{ const r=await fetch('/api/estado',{cache:'no-store'}); if(!r.ok) return; e=await r.json(); if(!e||!('done' in e)) return; }catch(_){ return; }
-  SYNC.on=true; SYNC.ok=true; SYNC.primeiro=true;
-  // primeira conexão: soma o que este aparelho já tinha (nada se perde) e envia ao PC
-  const now=Date.now(), P=SYNC.pend;
-  Object.keys(S.done).forEach(id=>{ const r=(e.done||{})[id]; if(!r||!r[0]) P.done[id]=[1,now]; });
-  Object.entries(S.notes).forEach(([id,v])=>{ const r=(e.notes||{})[id]; if(!r||!r[0]) P.notes[id]=[v,now]; });
-  S.custom.forEach(p=>{ if(!(e.custom||{})[p.id]) P.custom[p.id]=[p,now]; });
-  applyRemote(e); syncPush();
-  setInterval(syncPull,3000);
-  document.addEventListener('visibilitychange',()=>{ if(!document.hidden) syncPull(); });
+  const tok=SYNC_REPO?(lsGet(TK_KEY)||''):'';
+  if(tok){ SYNC.track=true; SYNC.snap=snapOf(); } // registra as mudanças desde já, mesmo antes de conectar
+  if(SYNC_REPO) syncUiInit();
+  if(await lanStart()) return;
+  if(tok){ ghBegin(tok); ghConnect(); }
+}
+
+/* --- transporte LAN (servidor_mapa.py) --- */
+async function lanStart(){
+  if(!/^https?:/.test(location.protocol)) return false;
+  let e; try{ const r=await fetch('/api/estado',{cache:'no-store'}); if(!r.ok) return false; e=await r.json(); if(!e||!('done' in e)) return false; }catch(_){ return false; }
+  SYNC.mode='lan'; SYNC.on=true; SYNC.ok=true; SYNC.ready=true; SYNC.track=true; SYNC.err=null;
+  const b=document.getElementById('syncBtn'); if(b) b.style.display='none';
+  syncJoin(e,'lan'); syncPush();
+  setInterval(lanPull,3000);
+  document.addEventListener('visibilitychange',()=>{ if(!document.hidden) lanPull(); });
+  updSavedInfo(); return true;
+}
+async function lanPush(){
+  if(pendVazio()) return; if(SYNC.busy){ SYNC.again=true; return; }
+  const sent=pendClone(); SYNC.busy=true; SYNC.again=false;
+  try{ const r=await fetch('/api/estado',{method:'POST',body:JSON.stringify(sent)}); if(!r.ok) throw 0; SYNC.ok=true; pendDrop(sent); }
+  catch(e){ SYNC.ok=false; }
+  SYNC.busy=false; updSavedInfo();
+  if(SYNC.again&&SYNC.ok){ SYNC.again=false; setTimeout(syncPush,0); }
+}
+async function lanPull(){
+  if(SYNC.busy) return;
+  try{ const r=await fetch('/api/estado?v='+SYNC.ver,{cache:'no-store'}); SYNC.ok=true; if(r.status!==204) applyRemote(await r.json()); }
+  catch(e){ SYNC.ok=false; } updSavedInfo();
+  if(SYNC.ok&&!pendVazio()) syncPush();
+}
+
+/* --- transporte conta (API do GitHub: repos/{SYNC_REPO}/contents/progresso.json) --- */
+function ghUrl(p){ return GH_API.replace(/\/+$/,'')+'/repos/'+SYNC_REPO+(p||''); }
+function ghHdr(tok,extra){ return Object.assign({'Authorization':'Bearer '+tok,'Accept':'application/vnd.github+json'},extra||{}); }
+function b64dec(s){ const bin=atob(String(s).replace(/\s/g,'')), u=new Uint8Array(bin.length); for(let i=0;i<bin.length;i++) u[i]=bin.charCodeAt(i); return new TextDecoder().decode(u); }
+function b64enc(str){ const u=new TextEncoder().encode(str); let bin=''; for(let i=0;i<u.length;i+=0x8000) bin+=String.fromCharCode.apply(null,u.subarray(i,i+0x8000)); return btoa(bin); }
+function mergeState(base,add){ const o={done:{},notes:{},custom:{}};
+  for(const k in o){ const b=(base&&base[k])||{}; for(const id in b) if(Array.isArray(b[id])) o[k][id]=b[id];
+    const a=(add&&add[k])||{}; for(const id in a){ const c=o[k][id], p=a[id]; if(!c||p[1]>=c[1]) o[k][id]=p; } }
+  return o; }
+function ghLimite(r){ return r.status===429||(r.status===403&&(r.headers.get('x-ratelimit-remaining')==='0'||!!r.headers.get('retry-after'))); }
+// {same} = 304 · {err:'token'} = 401/403 · {st,state,sha,etag} = 200/404 · lança erro em falha de rede/servidor
+async function ghGet(force,tok){
+  tok=tok||SYNC.tok; const h={}; if(!force&&SYNC.etag) h['If-None-Match']=SYNC.etag;
+  const r=await fetch(ghUrl('/contents/progresso.json'),{headers:ghHdr(tok,h),cache:'no-store'});
+  if(r.status===304) return {same:true};
+  if(r.status===404) return {st:404,state:mergeState(null,null),sha:null,etag:null};
+  if(r.status===401||(r.status===403&&!ghLimite(r))) return {err:'token'};
+  if(!r.ok) throw new Error('http '+r.status);
+  const j=await r.json(); let st=null; try{ st=JSON.parse(b64dec(j.content||'')); }catch(e){}
+  return {st:200,state:mergeState(st,null),sha:j.sha||null,etag:r.headers.get('ETag')};
+}
+function ghKeep(g){ SYNC.remote=g.state; SYNC.sha=g.sha; SYNC.etag=g.etag; }
+function ghBegin(tok){
+  SYNC.tok=tok; SYNC.mode='gh'; SYNC.on=true; SYNC.ready=false; SYNC.ok=false; SYNC.err=null; SYNC.etag=null; SYNC.sha=null; SYNC.remote=null;
+  if(!SYNC.track){ SYNC.track=true; SYNC.snap=snapOf(); }
+  updSavedInfo();
+}
+async function ghConnect(g){
+  clearTimeout(SYNC.tr); const tok=SYNC.tok;
+  if(!g){ try{ g=await ghGet(true,tok); }
+    catch(e){ if(tok!==SYNC.tok||!SYNC.on) return; SYNC.ok=false; SYNC.err='rede'; updSavedInfo(); SYNC.tr=setTimeout(()=>ghConnect(),15000); return; } }
+  if(tok!==SYNC.tok||!SYNC.on) return;
+  if(g.err){ SYNC.ok=false; SYNC.err='token'; updSavedInfo(); return; }
+  ghKeep(g); SYNC.ok=true; SYNC.err=null; SYNC.ready=true;
+  syncJoin(g.state,SYNC_REPO);
+  if(!SYNC.iv){ SYNC.iv=setInterval(ghPoll,5000); document.addEventListener('visibilitychange',()=>{ if(!document.hidden) ghPoll(); }); }
+  updSavedInfo();
+  if(!pendVazio()) ghPush();
+}
+async function ghPoll(){
+  if(!SYNC.on||SYNC.mode!=='gh'||!SYNC.ready||SYNC.busy||SYNC.err==='token'||document.hidden) return;
+  const tok=SYNC.tok, gen=SYNC.gen||0;
+  try{ const g=await ghGet(false,tok);
+    if(tok!==SYNC.tok||!SYNC.on||gen!==(SYNC.gen||0)) return; // saiu, trocou de código ou houve envio no meio: descarta
+    if(g.err){ SYNC.ok=false; SYNC.err='token'; }
+    else { SYNC.ok=true; SYNC.err=null; if(!g.same){ ghKeep(g); applyRemote(g.state); } } }
+  catch(e){ if(tok!==SYNC.tok||!SYNC.on) return; SYNC.ok=false; SYNC.err='rede'; }
+  updSavedInfo();
+  if(SYNC.ok&&!pendVazio()) ghPush();
+}
+async function ghPush(){
+  if(!SYNC.on||SYNC.mode!=='gh'||!SYNC.ready||SYNC.err==='token'||pendVazio()) return;
+  if(SYNC.busy){ SYNC.again=true; return; }
+  SYNC.busy=true; SYNC.again=false; const tok=SYNC.tok;
+  try{
+    for(let i=0;;i++){
+      const sent=pendClone(), merged=mergeState(SYNC.remote,sent), body={message:'progresso',content:b64enc(JSON.stringify(merged))};
+      if(SYNC.sha) body.sha=SYNC.sha;
+      const r=await fetch(ghUrl('/contents/progresso.json'),{method:'PUT',headers:ghHdr(tok,{'Content-Type':'application/json'}),cache:'no-store',body:JSON.stringify(body)});
+      if(tok!==SYNC.tok||!SYNC.on) break;
+      if(r.ok){ let j={}; try{ j=await r.json(); }catch(_){}
+        SYNC.gen=(SYNC.gen||0)+1; SYNC.remote=merged; SYNC.sha=(j.content&&j.content.sha)||null; SYNC.etag=null;
+        pendDrop(sent); SYNC.ok=true; SYNC.err=null; break; }
+      if((r.status===409||r.status===422)&&i<3){ // sha desatualizado: busca de novo, refaz o merge e tenta outra vez
+        const g=await ghGet(true,tok); if(tok!==SYNC.tok||!SYNC.on) break;
+        if(g.err){ SYNC.ok=false; SYNC.err='token'; break; }
+        SYNC.gen=(SYNC.gen||0)+1; ghKeep(g); applyRemote(g.state); continue; }
+      if(r.status===401||r.status===404||(r.status===403&&!ghLimite(r))){ SYNC.ok=false; SYNC.err='token'; break; }
+      throw new Error('http '+r.status);
+    }
+  }catch(e){ if(tok===SYNC.tok&&SYNC.on){ SYNC.ok=false; SYNC.err='rede'; } }
+  SYNC.busy=false; updSavedInfo();
+  if(SYNC.again&&SYNC.ok){ SYNC.again=false; setTimeout(ghPush,0); }
+}
+
+/* --- interface "Entrar" (só quando SYNC_REPO não é vazio) --- */
+function syncUiInit(){
+  const b=document.getElementById('syncBtn'); if(!b||document.getElementById('syncDlg')) return;
+  b.style.display=''; b.onclick=syncDlgOpen;
+  const w=document.createElement('div'); w.className='sd-wrap'; w.id='syncDlg';
+  w.innerHTML='<div class="sd" role="dialog" aria-modal="true" aria-labelledby="sdT">'
+    +'<div class="sd-h"><b id="sdT">👤 Entrar</b><button type="button" class="sd-x" data-a="close" aria-label="Fechar">✕</button></div>'
+    +'<p>Depois de entrar, tudo o que você marcar, anotar ou criar é salvo sozinho na conta e aparece nos outros aparelhos que entrarem com o mesmo <b>código de acesso</b>.</p>'
+    +'<label for="sdTok">Código de acesso</label>'
+    +'<div class="sd-in"><input id="sdTok" type="password" autocomplete="off" autocapitalize="off" autocorrect="off" spellcheck="false" enterkeyhint="go" placeholder="Cole o código aqui">'
+    +'<button type="button" data-a="eye">Mostrar</button></div>'
+    +'<div class="sd-st" id="sdSt" aria-live="polite"></div>'
+    +'<div class="sd-acts"><button type="button" class="btn pri" data-a="ok">Entrar</button><button type="button" class="btn dng" data-a="off">Sair deste aparelho</button></div></div>';
+  document.body.appendChild(w);
+  const inp=w.querySelector('#sdTok'), eye=w.querySelector('[data-a=eye]');
+  w.addEventListener('click',e=>{ if(e.target===w) syncDlgClose(); });
+  w.querySelector('[data-a=close]').onclick=syncDlgClose;
+  eye.onclick=()=>{ const ver=inp.type==='password'; inp.type=ver?'text':'password'; eye.textContent=ver?'Ocultar':'Mostrar'; };
+  inp.addEventListener('keydown',e=>{ if(e.key==='Enter'){ e.preventDefault(); syncEntrar(); } });
+  w.querySelector('[data-a=ok]').onclick=syncEntrar;
+  w.querySelector('[data-a=off]').onclick=syncSair;
+  document.addEventListener('keydown',e=>{ if(e.key==='Escape'&&w.classList.contains('on')) syncDlgClose(); });
+  updSavedInfo();
+}
+function syncUiUpd(){
+  if(!SYNC_REPO) return; const b=document.getElementById('syncBtn'), w=document.getElementById('syncDlg'); if(!b||!w) return;
+  const ligado=SYNC.on&&SYNC.mode==='gh';
+  b.textContent=ligado?'👤 Conectado · salvamento automático':'👤 Entrar para salvar na conta';
+  b.classList.toggle('on',ligado&&SYNC.ok&&SYNC.ready);
+  if(w._busy) return;
+  w.querySelector('[data-a=off]').style.display=ligado?'':'none';
+  w.querySelector('#sdTok').placeholder=ligado?'Código já salvo (cole outro para trocar)':'Cole o código aqui';
+  let t='Você ainda não entrou neste aparelho.', c='';
+  if(ligado){ if(SYNC.err==='token'){ t='⚠️ Código de acesso inválido'; c='bad'; }
+    else if(SYNC.err==='rede'){ t='⚠️ Sem conexão: as marcações serão enviadas quando a internet voltar'; c='bad'; }
+    else if(SYNC.ok&&SYNC.ready){ t='✅ Conectado · salvamento automático na conta'; c='ok'; }
+    else t='Entrando...'; }
+  const st=w.querySelector('#sdSt'); st.textContent=t; st.className='sd-st'+(c?' '+c:'');
+}
+function syncDlgOpen(){ const w=document.getElementById('syncDlg'); if(!w) return; syncUiUpd(); w.classList.add('on'); }
+function syncDlgClose(){ const w=document.getElementById('syncDlg'); if(!w) return; w.classList.remove('on');
+  const inp=w.querySelector('#sdTok'); inp.value=''; inp.type='password'; w.querySelector('[data-a=eye]').textContent='Mostrar'; }
+async function syncEntrar(){
+  const w=document.getElementById('syncDlg'); if(!w||w._busy) return;
+  const inp=w.querySelector('#sdTok'), ok=w.querySelector('[data-a=ok]'), st=w.querySelector('#sdSt');
+  const msg=(t,c)=>{ st.textContent=t; st.className='sd-st'+(c?' '+c:''); };
+  const tok=inp.value.replace(/\s+/g,'');
+  if(!tok){ msg('Cole o código de acesso no campo acima.','bad'); return; }
+  if(SYNC.mode==='lan'){ msg('Este aparelho já está sincronizando pela rede de casa.','bad'); return; }
+  w._busy=true; ok.disabled=true; msg('Conferindo o código...');
+  let g=null, erro=null;
+  try{ g=await ghGet(true,tok);
+    if(g.err) erro='token';
+    else if(g.st===404){ // arquivo ainda não existe: confere se o código enxerga o repositório
+      const r=await fetch(ghUrl(''),{headers:ghHdr(tok),cache:'no-store'});
+      if(!r.ok) erro=(r.status===401||r.status===404||(r.status===403&&!ghLimite(r)))?'token':'rede'; } }
+  catch(e){ erro='rede'; }
+  w._busy=false; ok.disabled=false;
+  if(erro==='token'){ msg('⚠️ Código de acesso inválido. Confira se colou o código inteiro.','bad'); return; }
+  if(erro){ msg('⚠️ Sem conexão com a internet. Tente de novo quando a internet voltar.','bad'); return; }
+  lsSet(TK_KEY,tok); ghBegin(tok); await ghConnect(g);
+  syncDlgClose(); toast('✅ Pronto! Agora tudo é salvo automaticamente na conta');
+}
+function syncSair(){
+  lsSet(TK_KEY,null); lsSet(JOIN_KEY,null); // ao entrar de novo, o que este aparelho tiver é somado à conta
+  SYNC.pend=pendVazioObj(); pendSave(); clearTimeout(SYNC.tr); clearTimeout(SYNC.t);
+  SYNC.on=false; SYNC.ready=false; SYNC.track=false; SYNC.mode=null; SYNC.ok=false; SYNC.err=null; SYNC.tok=''; SYNC.etag=null; SYNC.sha=null; SYNC.remote=null;
+  updSavedInfo(); syncDlgClose(); toast('Você saiu neste aparelho. O progresso continua salvo aqui.');
 }
 const h=decodeURIComponent(location.hash||''); if(h.startsWith('#m=')) setTimeout(()=>focusItem(h.slice(3)),300);
 });
